@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Tobias Youth</title>
+    <link rel="stylesheet" href="urembo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+</head>
+<body>
+<div id="header">
+    <div class="container">
+  <nav>
+      <ul id="sidemenu">
+          <li><a href="#">Home</a></li>
+          <li><a href="leaders.html">leaders</a></li>
+          <li><a href="members.html">Members</a></li>
+          <li><a href="#">Calender of Events</a></li>
+          <i class="fa-solid fa-circle-xmark" onclick="closemenu()"></i>
+      </ul>
+      <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+  </nav>
+        <br>
+        <br>
+        <br>
+        <div class="slider-frame">
+            <div class="slide-images">
+                <div class="img-container">
+                    <img src="images/church.jpg">
+                </div>
+                <div class="img-container">
+                    <img src="images/church.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h3><u>Fill your Name below</u> </h3>
+<br>
+<br>
+<div class="contact-right">
+    <form name="submit-to-google-sheet">
+        <input type="text" name="Name" placeholder="yourname" required>
+        <button type="submit" class="btn btn2" >submit</button>
+    </form>
+    <span id="msg"></span>
+</div>
+    <br>
+    <br>
+    <div class="copyright">
+        <p>Copyright @ REM Technologies. Remtosh</p>
+    </div>
+<script>
+    var sidemenu= document.getElementById("sidemenu");
+
+    function openmenu()
+    {
+        sidemenu.style.right = "0";
+    }
+    function closemenu()
+    {
+        sidemenu.style.right = "-200px";
+    }
+
+
+</script>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwxjMqqT9O2wFF6EKWxbd8S4rLJLtA1lcTOYtC5dEnqHVwSAclcu7lEMySWZdsSIa5OCA/exec'
+    const form = document.forms['submit-to-google-sheet']
+     const msg = document.getElementById("msg")
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "successful!"
+                setTimeout(function ()
+                {
+                    msg.innerHTML = ""
+                },5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+    })
+</script>
+</body>
+</html>
